@@ -506,11 +506,13 @@ Agents that operate businesses eventually hit messy PDFs, scans, tables, slides,
 - **Best for:** fast local document-to-context ingestion and routing before heavier parsing; Office inputs require LibreOffice conversion, and heuristic Markdown is not a substitute for complex chart or layout understanding.
 - **Deployment note:** the [OCR setup](https://github.com/run-llama/liteparse#ocr-setup) requires pre-downloaded Tesseract language data for offline use; optional HTTP OCR sends images to the configured endpoint. Its [benchmark comparisons](https://github.com/run-llama/liteparse#benchmarks) are maintainer-run against selected local converters, not an independent ranking against full VLM pipelines. Last checked: 2026-10-14.
 
+**OCR review-routing companion:** [MiniCPM-OCR Jev](https://github.com/OpenBMB/MiniCPM-OCR/blob/main/docs/minicpm_ocr_jev_en.md) is an Apache-2.0, 2B model that scores existing text, formula, and table regions against their source images, supporting human-review routing and selection among parser candidates. Its maintainer-run JevOCRBench reports discrimination (AUROC), not guaranteed acceptance accuracy. Calibrate thresholds on labelled target documents and revalidate after parser changes; compare candidates from the same crop and accept scores only when `verdict` is `scored`. It judges supplied regions, not whole-document completeness. Last checked: 2026-11-17.
+
 ### OmniDocBench
 - **Link:** https://github.com/opendatalab/OmniDocBench
 - **Why it stands out:** CVPR 2025 benchmark with public annotations and evaluation code for end-to-end parsing, layout, text, tables, formulas, and reading order across varied real-world documents.
 - **Best for:** comparing pipeline parsers, specialized OCR models, and general VLMs on one shared suite; pair it with PureDocBench when scan degradation is a deployment risk.
-- **Scope note:** pin the evaluator and parser versions: matching logic has changed, and the README limits text evaluation to Chinese and English. The code is Apache-2.0, but the [dataset copyright statement](https://github.com/opendatalab/OmniDocBench#copyright-statement) specifies research-only, noncommercial use; do not conflate code and data permissions. Last checked: 2026-09-25.
+- **Scope note:** pin the dataset, evaluator, and parser versions: matching logic and page coverage have changed. The [end-to-end Overall score](https://github.com/opendatalab/OmniDocBench#end-to-end-evaluation) averages text edit accuracy, table TEDS, and formula CDM; reading order is reported separately, so a high Overall score does not establish correct document sequencing. The code is Apache-2.0, but the [dataset copyright statement](https://github.com/opendatalab/OmniDocBench#copyright-statement) specifies research-only, noncommercial use; do not conflate code and data permissions. Last checked: 2026-11-17.
 
 ### ParseBench
 - **Link:** https://arxiv.org/html/2604.08538v3
