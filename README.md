@@ -211,6 +211,7 @@ These are the strongest starting points when you need a general builder stack, n
 - **Link:** https://github.com/pipecat-ai/pipecat
 - **Why it stands out:** Python framework that composes speech, models, tools, and transports into pipelines, with built-in Flows for structured conversations and multi-agent handoff, parallel fan-out, and sidecar workers over a shared bus.
 - **Best for:** teams that want fine-grained pipeline and conversation control across local or distributed agents; compare LiveKit Agents when integrated media infrastructure and session operations are the stronger requirement. Last checked: 2026-10-03.
+- **Testing note:** built-in [Pipecat Evals](https://docs.pipecat.ai/pipecat/evals/overview) supports scripted tool/argument assertions and goal-driven simulated callers against the real agent. Text mode skips STT/TTS; audio mode exercises the speech pipeline but judges transcribed output, not audio quality itself. The [evaluation lifecycle guide](https://docs.pipecat.ai/pipecat/evals/lifecycle) calls for separate deployed-transport, load, audio-signal, and execution-state checks. Use local evals as regression gates, not proof of telephony reliability or completed downstream actions. Last checked: 2026-11-19.
 
 ### TEN Framework
 - **Link:** https://github.com/TEN-framework/ten-framework
